@@ -5,13 +5,12 @@ import MainareaiconChat from '../Assets/Mainareaicon_Chat.png'
 import MainareaiconFolder from '../Assets/Mainareaicon_Folder.png'
 import SandIcon from '../Assets/Sandicon.png'
 import { Avatar } from '@mui/material'
-import { Timestamp, addDoc, arrayUnion, collection, doc, getDoc, getDocs, serverTimestamp, setDoc, updateDoc, onSnapshot  } from "firebase/firestore";
+import { arrayUnion,doc, getDoc,updateDoc, onSnapshot } from "firebase/firestore";
 import { db } from '../Firebase/firebase'
-import { useNavigate, useLocation, json } from 'react-router-dom';
-import axios from 'axios';
+import {useLocation} from 'react-router-dom';
+
 
 const MainareaLayout = (props) => {
-const Path = window.location.pathname
 const location = useLocation();
 const [message, setMessage] = useState('');
 const [FBmessages, setFBMessages] = useState([]);
