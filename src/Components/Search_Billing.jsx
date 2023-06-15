@@ -6,7 +6,7 @@ import {Datacontext} from '../Context/Data';
 const Search_Billing = () => {
 const [searchvalue,setSearchvalue] = useState('')
 const [Linkto, setLinkto] = useState('')
-  const {UserData,setUserData} = useContext(Datacontext)
+const {UserData,setUserData} = useContext(Datacontext)
   
   const SearchAI = (e)=>{
   e.preventDefault()

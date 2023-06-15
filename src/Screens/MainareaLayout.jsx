@@ -11,7 +11,7 @@ import {useLocation} from 'react-router-dom';
 
 
 const MainareaLayout = (props) => {
-const location = useLocation();
+const {pathname} = useLocation();
 const [message, setMessage] = useState('');
 const [FBmessages, setFBMessages] = useState([]);
 const [refreshMessages, setRefreshMessages] = useState(false);

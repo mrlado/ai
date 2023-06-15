@@ -1,22 +1,17 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext } from 'react'
 import Logo from '../Assets/Logo.png'
 import GoogleLogo from '../Assets/GoogleIcon.png'
-import EmailIcon from '../Assets/Emailicon.png'
-import Passwordicon from '../Assets/Passwordicon.png'
 import rightBGimage from '../Assets/LoginPageImage.png'
 import { auth ,db,provider  } from '../Firebase/firebase'
-import {createUserWithEmailAndPassword,signInWithEmailAndPassword,signInWithPopup  } from "firebase/auth";
+import {signInWithPopup} from "firebase/auth";
 import { collection, doc, setDoc } from "firebase/firestore";
 import {Datacontext} from '../Context/Data'
-import axios from 'axios'
+
 
 
 
 const Login = (props) => {
-const  [inputData, setInputData] = useState({
-    Email:'',
-    Password:''
-})
+
 
 const {UserData,setUserData} = useContext(Datacontext)
 

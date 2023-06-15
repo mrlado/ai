@@ -1,10 +1,7 @@
-import logo from './logo.svg';
+
 import './App.css';
 import Layout from './Layout';
-import {
-  BrowserRouter,
-  Link
-} from "react-router-dom";
+import {BrowserRouter} from "react-router-dom";
 import Data from './Context/Data';
 
 function App() {

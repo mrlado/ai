@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import MainareaiconArtificium from '../Assets/Mainareaicon_Artificium.png'
 import MainareaiconChat from '../Assets/Mainareaicon_Chat.png'
 import MainareaiconFolder from '../Assets/Mainareaicon_Folder.png'
-import {MdKeyboardVoice} from'react-icons/md'
-import { Avatar } from '@mui/material'
+
 import SandIcon from '../Assets/Sandicon.png'
 
 const Voicespeach = (props) => {

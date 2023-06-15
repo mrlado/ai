@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import ClientArea from '../Components/ClientArea'
 import Search_Billing from '../Components/Search_Billing'
 import Chatwith from '../Components/Chatwith'
@@ -14,10 +14,8 @@ import Settings from './Settings';
 import Voicespeach from './Voicespeach';
 
 
-const MainPage = ({UserData,UserImg}) => {
-const [FullData,setFullData] = useState([])
-const [ClientMess ,setClientMess] = useState([])
-const [AIMess ,setAIMess] = useState([])
+const MainPage = ({UserImg}) => {
+
 
 
   
