@@ -56,17 +56,17 @@ const MainPage = ({UserImg}) => {
             
             />} />
 
-        <Route path='/Voicespeach' element={
-        <Voicespeach
-        Title='Recipes By AI' 
-        InputPlaceholder='Ingredients...'
-        Decription = "Not sure what to cook tonight?"
-        Navone=''
-        Navtwo=''
-        Navthree=''
-        RefreshData='1'
-        
-        />} />
+            <Route path='/Voicespeach' element={
+            <Voicespeach
+            Title='Recipes By AI' 
+            InputPlaceholder='Ingredients...'
+            Decription = "Not sure what to cook tonight?"
+            Navone=''
+            Navtwo=''
+            Navthree=''
+            RefreshData='1'
+            
+            />} />
 
           </Routes>
         </div>

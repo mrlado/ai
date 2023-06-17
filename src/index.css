@@ -50,3 +50,30 @@ align-items: center;
   .productConteiner::-webkit-scrollbar-thumb {
     background-color: transparent;
   }
+
+
+ /* =========================Spin AiChat Logo======================================== */
+  @keyframes rotate  {
+    0% { transform: rotatey(0deg); }
+    100% { transform: rotatey(360deg); }
+  }
+  
+  .spinning {
+    animation: rotate 2s infinite;
+  }
+
+ /* ================================ End ================================= */
+
+ /* ConversationArea sroll Lift */
+ .ConversationArea::-webkit-scrollbar {
+  width: 5px;
+  background-color: black;
+  border-radius: 50px;
+
+}
+
+.ConversationArea::-webkit-scrollbar-thumb {
+  background-color: #B6F09C;
+  border-radius: 50px;
+}
+/* end */

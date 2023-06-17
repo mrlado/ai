@@ -8,13 +8,15 @@ import { Avatar } from '@mui/material'
 import { arrayUnion,doc, getDoc,updateDoc, onSnapshot } from "firebase/firestore";
 import { db } from '../Firebase/firebase'
 import {useLocation} from 'react-router-dom';
-
+import axios from 'axios';
 
 const MainareaLayout = (props) => {
 const {pathname} = useLocation();
 const [message, setMessage] = useState('');
+const [AIanswere, setAIanswere] = useState('')
 const [FBmessages, setFBMessages] = useState([]);
 const [refreshMessages, setRefreshMessages] = useState(false);
+const [AILoading, setAILoading] = useState(false)
 
 const userid =    window.localStorage.getItem('user')
 const docRef = doc(db, 'Users', userid);
@@ -39,6 +41,46 @@ const getMessages = async () => {
 };
 /// Get messages form firebase end
 
+// get messages form AI start
+const getAImessages = async () => {
+  setAILoading(true)
+  const options = {
+    method: 'POST',
+    url: 'https://chatgpt-gpt4-ai-chatbot.p.rapidapi.com/ask',
+    headers: {
+      'content-type': 'application/json',
+      'X-RapidAPI-Key': 'cfe3db2f61msh150b3b7561cb210p150ad8jsn027be7c10555',
+      'X-RapidAPI-Host': 'chatgpt-gpt4-ai-chatbot.p.rapidapi.com'
+    },
+    data: {
+      query: message
+    }
+  };
+  try {
+    const response = await axios.request(options);
+    
+    const newMessage = {
+      sender: 'AI',
+      message: response.data.response,
+      timestamp: new Date(),
+    };
+    setAILoading(false)
+    if (message.length> 0 ){
+      try {
+        await updateDoc(docRef, {
+          'RecipiesByAI.Messages': arrayUnion(newMessage),
+        });
+        console.log('Document updated');
+      } catch (error) {
+        console.error('Error updating document:', error);
+      }
+      }else return
+
+  } catch (error) {
+    console.error(error);
+  }
+}
+// get messages form AI end
 
 //update messages imadiatly start
 useEffect(() => {
@@ -78,11 +120,16 @@ if (message.length> 0 ){
   }
   }else return
 
-    setMessage('');
-    setRefreshMessages(!refreshMessages);
+
+    getAImessages()
+    .then(setMessage(''))
+    .then(setRefreshMessages(!refreshMessages))
+    .catch(console.error);
+    
+    ;
   };
   
-
+const sorteddata  =  FBmessages.sort((a,b) => b.timestamp - a.timestamp)
 
   return (
     <div className='MainArea_Conteiner px-4'>
@@ -107,8 +154,12 @@ if (message.length> 0 ){
                 </ul>
             </div>
         </div>
-    <div className="ConversationArea w-full h-[68vh] p-4 overflow-y-auto">
-
+    <div className="ConversationArea w-full h-[68vh] p-4 overflow-y-auto md:h-[63vh]  ">
+    {/* loading start */}
+    {AILoading &&  <div  className='Ai flex items-center max-w-[1.5%] gap-4 whitespace-normal my-4 text-[14px]  ml-auto text-[#B6F09C] spinning'>
+                    <Avatar src={MainareaiconArtificium} sx={{width:'20px', height:'20px'}}/>
+                </div>}
+    {/* loading start */}
     { FBmessages && FBmessages.map((value, index, array) => {
 
         if(value.sender === "client"){
@@ -127,7 +178,7 @@ if (message.length> 0 ){
     })}
 
     </div>
-    <div className='inputField w-full h-[7vh] p-2 bg-Black rounded-2xl flex md:-mt-6'> 
+    <div className='inputField w-full h-[7vh] p-2 bg-Black rounded-2xl flex md:mt-6'> 
     <form action="onsubmit" className='flex justify-around items-center gap-4 pl-8 md:pl-0'>
     <input type="text" 
     placeholder={props.InputPlaceholder || 'You can ask me anything! I am here to help.'} 
